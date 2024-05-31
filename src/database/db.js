@@ -1,19 +1,22 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { databaseUrl } = require("../lib/exports");
 
 const initializeDatabase = () => {
-  const dbUrl = process.env.DB_URL
+  if (!databaseUrl) {
+    throw new Error("DB_URL is not defined in environment variables");
+  }
 
-  mongoose.connect(dbUrl, {})
+  mongoose.connect(databaseUrl, {});
 
-  const db = mongoose.connection
+  const db = mongoose.connection;
 
   db.on("error", () => {
-    console.error.bind(console, "MongoDB connection error:")
-    process.exit(1)
-  })
+    console.error.bind(console, "MongoDB connection error:");
+    process.exit(1);
+  });
   db.once("open", () => {
-    console.log("Connected to the database")
-  })
-}
+    console.log("Connected to the database");
+  });
+};
 
-module.exports = { initializeDatabase }
+module.exports = { initializeDatabase };
