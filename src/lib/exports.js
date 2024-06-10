@@ -5,6 +5,7 @@ const LOCKOUT_DURATION_MINUTES = 2
 const resendEmailTime = 2;
 const port = process.env.PORT || 3001;
 const databaseUrl = process.env.DB_URL || "";
+const jwtTokenSecret="12345678"
 
 module.exports = {
     PAGE_SIZE,
@@ -14,4 +15,5 @@ module.exports = {
     resendEmailTime,
     port,
     databaseUrl,
+    jwtTokenSecret
 }
